@@ -1,0 +1,55 @@
+body
+{
+    background-color:#333;
+    color:#1CECB9;
+}
+
+h2
+{
+    font-size:xx-large;
+    color:#1CECB9;
+    font-family:Avantgarde, sans-serif;
+    -moz-border-radius:180px;
+    -webkit-border-radius:180px;
+    border-radius:180px;
+    border: 2px double #9b9b9b;
+    -moz-box-shadow: inset 1px 1px 20px 1px #67fd9a;
+    -webkit-box-shadow: inset 1px 1px 20px 1px #67fd9a;
+    -o-box-shadow: inset 1px 1px 20px 1px #67fd9a;
+    box-shadow: inset 1px 1px 20px 1px #67fd9a;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#67fd9a, Direction=134, Strength=20);
+    -moz-border-radius: 75px;
+    -webkit-border-radius: 75px;
+    border-radius: 75px;
+}
+
+h4
+{
+    color:#CE6656;
+    box-shadow: 0px 5px 9px 0px #ffffff;
+    border-radius: 13px;
+    width:410px;
+    margin-left:15px;
+}
+
+p
+{
+    margin-left:40px;
+}
+
+input
+{
+    color:#343434;
+    bg-color:blue;
+    margin-left:40px;
+}
+
+table
+{
+    margin-left:40px;
+}
+
+tr
+{
+    margin-left:40px;
+}

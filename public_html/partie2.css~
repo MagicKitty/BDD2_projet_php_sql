@@ -1,0 +1,26 @@
+html
+{
+    font-family: "bookman";
+}
+
+body
+{
+    background: #333;
+    color: #28a687;
+}
+
+h1
+{
+    text-align: center;
+    color: #1cecb9;
+    text-decoration: underline;
+}
+
+p
+{
+    color: #1cecb9;
+}
+
+input[type="number"] {
+   width:50px;
+}

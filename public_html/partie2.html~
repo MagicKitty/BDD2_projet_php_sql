@@ -1,0 +1,31 @@
+<html>
+<head>
+  <meta charset="UTF-8"> 
+  <link rel="stylesheet" type="text/css" href="partie2.css">
+  <h1>Partie 2 : modification BDD</h1>
+  <br/>
+</head>
+<body>
+  <p>Saisissez un type d'oeuvre : </p>
+  <FORM>
+  <INPUT type="radio" name="Type d'oeuvre" value="Livre">Livre
+  <INPUT type="radio" name="Type d'oeuvre" value="Musique">Musique
+  <INPUT type="radio" name="Type d'oeuvre" value="Film">Film
+  </FORM>
+  <br/>
+  <p>Titre : ------------<INPUT type="text" name="Titre" size="30"></p>
+  <p>Date Création : </p>
+  Jour <SELECT name="Jour">
+    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option>
+  </SELECT> Mois <SELECT name="Mois">
+    <option>Janvier</option><option>Février</option><option>Mars</option><option>Avril</option><option>Mai</option><option>Juin</option><option>Juillet</option><option>Aout</option><option>Septembre</option><option>Octobre</option><option>Novembre</option><option>Décembre</option>
+  </SELECT>
+  Année <INPUT type="text" name="Année" size="2">
+  <p>Langue : --------<INPUT type="text" name="Titre" size="30"></p>
+  <p>Epoque : --------<INPUT type="text" name="Titre" size="30"></p>
+  <p>Lieux : -----------<INPUT type="text" name="Titre" size="30"></p>
+  <p>Artiste : ---------<INPUT type="text" name="Titre" size="30"></p>
+  <br/>
+  <INPUT type="submit" value="Compléter">
+</body>
+</html>
