@@ -47,7 +47,7 @@
     }
     ?>
 
-    <form method="post" action="projet.php">
+    <form method="post" action="https://ens-bdd.fst.site.univ-lorraine.fr/~blin5u/projet.php">
 
     <p> Thème : <select name="theme">
     <?php
@@ -92,7 +92,7 @@
     ?>
     
     <h4> &nbsp;B) Liste des oeuvres ayant pour origine : </h4>
-    <form method="post" action="projet.php">
+    <form method="post" action="https://ens-bdd.fst.site.univ-lorraine.fr/~blin5u/projet.php">
     <p> Origine : <select name="Origine">
     <?php
     while($opt = oci_fetch_array($or,OCI_ASSOC+OCI_RETURN_NULLS)) {
@@ -130,7 +130,7 @@
     <p>
     <h4> &nbsp;C) Nombre d'oeuvre(s) musicale par genre : </h4>
 
-    <form method="post" action ="questionC.php">
+    <form method="post" action ="https://ens-bdd.fst.site.univ-lorraine.fr/~blin5u/questionC.php">
 
     <input type="submit" name="nombre" value="Afficher"  title="Cliquez pour afficher le nombre d'oeuvre musicale par genre" />
 
@@ -138,7 +138,7 @@
 
     <h4> &nbsp;D) Nombre d'oeuvre(s) par types et origine : </h4>
 
-    <form method="post" action ="questionD.php">
+    <form method="post" action ="https://ens-bdd.fst.site.univ-lorraine.fr/~blin5u/questionD.php">
 
     <input type="submit" name="nbpteo" value="Afficher"  title="Cliquez pour afficher le nombre d'oeuvre par type et par origine" />
 
@@ -149,7 +149,7 @@
     oci_close($conn);
     ?>
 
-    <br><br><p><form method="post" action="https://ens-bdd.fst.site.univ-lorraine.fr/~blin5u/partie2.html">
+    <br><br><p><form method="post" action="https://ens-bdd.fst.site.univ-lorraine.fr/~blin5u/insertion.php">
 
     <input type="submit" name="jlkjlk" value="Vers page d'ajout" title="Cliquez ici pour accedez a la pages d'ajout d'oeuvre dans la BDD"/>
     </form></p>

@@ -38,7 +38,7 @@
 
 <?php
       $livre = "Livre";
-      $music = "Oeuvre Musicale";
+      $music = "Oeuvre_Musicale";
       $film = "Film";
       $origin = "Lieu";
       $xyz = connection($conn,$req_liv);
@@ -47,25 +47,31 @@
       
       $req_ori = "SELECT nom FROM $origin";
       $abc = connection($conn,$req_ori);
-      
-      while ($z = oci_fetch_array($abc, OCI_ASSOC+OCI_RETURN_NULLS)) {
+
+      while ($z = oci_fetch_array($abc, OCI_RETURN_NULLS)) {
+	
 	print '<tr>';
-	foreach ($z as $it) {
-	  print '<td>'.($it !== null ? htmlentities($it, ENT_QUOTES) : '').'</td>';
-	}
-	if (count($z)==count($abc)) {
-	  $req_co = "SELECT count(titre) FROM $livre JOIN Oeuvre USING titre WHERE Oeuvre.nom = $z[0]";
+	  print '<td>'.$z[0].'</td>';
+	  $req_co = "SELECT count(titre) FROM $livre JOIN Oeuvre USING (titre) JOIN $origin USING (nom) WHERE nom LIKE '$z[0]'";
 	  $rep = oci_parse($conn, $req_co);
 	  oci_execute($rep);
-	  $res = oci_fetch_array($rep, OCI_ASSOC+OCI_RETURN_NULLS);
-	  print '<td>'.$res.'</td>';
-	}
-	if (count($z)==count($abc)) {
-	  print '<td></td>';
-	}
-	if (count($z)==count($abc)) {
-	  print '<td></td>';
-	}
+	  $res = oci_fetch_array($rep, OCI_RETURN_NULLS);
+	   print '<td>'.$res[0].'</td>';
+
+	  $req_con = "SELECT count(titre) FROM $music JOIN Oeuvre USING (titre) JOIN $origin USING (nom) WHERE nom LIKE '$z[0]'";
+	  $rep = oci_parse($conn, $req_con);
+	  oci_execute($rep);
+	  $res = oci_fetch_array($rep, OCI_RETURN_NULLS);
+	   print '<td>'.$res[0].'</td>';
+
+	  $req_cone = "SELECT count(titre) FROM $film JOIN Oeuvre USING (titre) JOIN $origin USING (nom) WHERE nom LIKE '$z[0]'";
+	  $rep = oci_parse($conn, $req_cone);
+	  oci_execute($rep);
+	  $res = oci_fetch_array($rep, OCI_RETURN_NULLS);
+	   print '<td>'.$res[0].'</td>';
+
+	   $i = $i + 1;
+	   
 	print '</tr>';
       }
       
