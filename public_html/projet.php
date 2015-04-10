@@ -9,6 +9,7 @@
     <h2 color='blue'><b><center>Bienvenue sur l'application d'interogation de la BDD</center></b></h2>
     <h3>Que voulez-vous ? </h3>
     <h4> &nbsp;A)Liste des oeuvres qui ont pour thème :</h4>
+    
     <?php
     $conn = oci_connect("etud003", "oracle", "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.depinfo.uhp-nancy.fr)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=depinfo)))");
     
@@ -26,6 +27,24 @@
     }
     
     oci_execute($stid);
+    ?>
+    
+    <?php
+    function connection($connex, $q) {
+      $rep = @oci_parse($connex, $q);
+      if (!$rep){
+	$e = @oci_error($connex);
+	print($e['message']);
+	exit;
+      }
+      $x = @oci_execute($rep);
+      if (!$x){
+	$e = @oci_error($rep);
+	echo($e['message']);
+	exit;
+      }
+      return $rep;
+    }
     ?>
 
     <form method="post" action="projet.php">
@@ -48,21 +67,8 @@
     if( isset($_POST['theme']) && !empty($_POST['theme'])) {
       $th = $_POST['theme'];
       $q = "SELECT titre FROM Oeuvre NATURAL JOIN Apourtheme WHERE libelle = '$th'";
-      //$c = "SELECT COUNT(titre) FROM Oeuvre NATURAL JOIN Apourtheme WHERE libelle = '$th'";
+      $rep = connection($conn,$q);
       echo"<p>Voici les films qui ont pour thème : $th</p>";
-      $rep=oci_parse($conn, $q);
-
-      if(!$rep) {
-	$e=oci_error($conn);
-	print($e['message']);
-	exit;
-      }
-      $x = oci_execute($rep);
-      if(!$x) {
-	$e=oci_error($conn);
-	print($e['message']);
-	exit;
-      }
       echo "<table border='1'>\n";
       while ($repo = oci_fetch_array($rep, OCI_ASSOC+OCI_RETURN_NULLS)) {
 	echo "<tr>\n";
@@ -108,18 +114,7 @@
 	       WHERE lieu.nom = '$ori' OR lieu.nom_continent = '$ori' ";
 
       echo"<p>Voici les oeuvres qui on pour origine : $ori</p>";
-      $rep=oci_parse($conn, $req);
-      if(!$rep)	{
-	$e=oci_error($conn);
-	print($e['message']);
-	exit;
-      }
-      $x = oci_execute($rep);
-      if(!$x) {
-	$e=oci_error($rep);
-	print($e['message']);
-	exit;
-      }
+      $rep=connection($conn, $req);
       echo "<table border='1'>\n";
       while ($repo = oci_fetch_array($rep, OCI_ASSOC+OCI_RETURN_NULLS)) {
 	echo "<tr>\n";
@@ -135,63 +130,24 @@
     <p>
     <h4> &nbsp;C) Nombre d'oeuvre(s) musicale par genre : </h4>
 
-    <!--<form method="post" action ="projet.php">
+    <form method="post" action ="questionC.php">
 
     <input type="submit" name="nombre" value="Afficher"  title="Cliquez pour afficher le nombre d'oeuvre musicale par genre" />
 
-    </form>-->
-    </p>
+    </form>
 
-    <?php
-    function connection($connex, $q) {
-      $rep = @oci_parse($connex, $q);
-      if (!$rep){
-	$e = @oci_error($connex);
-	print($e['message']);
-	exit;
-      }
-      $x = @oci_execute($rep);
-      if (!$x){
-	$e = @oci_error($rep);
-	echo($e['message']);
-	exit;
-      }
-      return $rep;
-    }
-    ?>
-
-    <?php
-      $req_genre = "SELECT Apourgenre.nom_genre,COUNT(Oeuvre_musicale.titre) FROM Oeuvre_musicale JOIN Apourgenre ON Apourgenre.titre = Oeuvre_musicale.titre GROUP BY Apourgenre.nom_genre";
-      $xyz = connection($conn,$req_genre);
-      print '<table border="1">';
-      print '<tr><td>Genres</td><td>Nombre</td></tr>';
-
-      while ($z = oci_fetch_array($xyz, OCI_ASSOC+OCI_RETURN_NULLS)) {
-	print '<tr>';
-	foreach ($z as $it) {
-	  print '<td>'.($it !== null ? htmlentities($it, ENT_QUOTES) : '').'</td>';
-	}
-	print '</tr>';
-      }
-      print '</table>';
-    ?>
-
-    <p>
     <h4> &nbsp;D) Nombre d'oeuvre(s) par types et origine : </h4>
 
-    <form method="post" action ="projet.php">
+    <form method="post" action ="questionD.php">
 
-    <input type="submit" name="nbpteo" value="Afficher"  title="Cliquez pour afficher le nombre d'oeuvre musicale par genre" />
+    <input type="submit" name="nbpteo" value="Afficher"  title="Cliquez pour afficher le nombre d'oeuvre par type et par origine" />
 
     </form>
     </p>
     
     <?php
-    if(isset($_POST['nbpteo']) && !empty ($_POST['nombre'])) {
-    }
+    oci_close($conn);
     ?>
-    
-    <?php oci_close($conn); ?>
 
     <br><br><p><form method="post" action="https://ens-bdd.fst.site.univ-lorraine.fr/~blin5u/partie2.html">
 
